@@ -103,18 +103,9 @@ public class Main {
           attributes.put("message", "There was an error: " + e);
           return new ModelAndView(attributes, "error.ftl");
       } finally {
-          if (connection != null) try{connection.close();} catch(SQLException e){}
+          if (connection != null) try{connection.close();}
       }
     });
-
-
-
-    get("/общественная-приемная", (request, response) -> {
-      Map<String, Object> attributes = new HashMap<>();
-      attributes.put("message", "Hello World!");
-
-      return new ModelAndView(attributes, "mp-public-reception.ftl");
-    }, new FreeMarkerEngine());
 
   }
 
