@@ -100,8 +100,9 @@ public class Main {
         stmt.executeUpdate("CREATE TABLE IF NOT EXISTS mantra (wisdom varchar, tick timestamp)");
         stmt.executeUpdate("INSERT INTO mantra VALUES (\"" + req.params("wisdom") + "\",now())");
       } catch (Exception e) {
-          attributes.put("message", "There was an error: " + e);
-          return new ModelAndView(attributes, "error.ftl");
+          //attributes.put("message", "There was an error: " + e);
+          //return new ModelAndView(attributes, "error.ftl");
+        return "There was an error: " + e;
       } finally {
           if (connection != null) try{connection.close();} catch(SQLException e){}
       }
