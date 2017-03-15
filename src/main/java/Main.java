@@ -112,6 +112,7 @@ public class Main {
     get("/mantra/list", (req, res) -> {
       Connection connection = null;
       Map<String, Object> attributes = new HashMap<>();
+      String output = "[";
       try {
         connection = DatabaseUrl.extract().getConnection();
 
@@ -119,7 +120,6 @@ public class Main {
         stmt.executeUpdate("CREATE TABLE IF NOT EXISTS mantra (wisdom varchar, tick timestamp)");
         ResultSet rs = stmt.executeQuery("SELECT wisdom FROM mantra");
 
-        String output = "[";
         while (rs.next()) {
           output += ( "\"" + rs.getString("wisdom") + "\"");
         }
@@ -131,7 +131,8 @@ public class Main {
       } finally {
         if (connection != null) try{connection.close();} catch(SQLException e){}
       }
-      return "Created OK";
+      output += "]";
+      return output;
     });
 
   }
