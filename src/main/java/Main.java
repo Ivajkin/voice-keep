@@ -109,6 +109,31 @@ public class Main {
       return "Created OK";
     });
 
+    get("/mantra/list", (req, res) -> {
+      Connection connection = null;
+      Map<String, Object> attributes = new HashMap<>();
+      try {
+        connection = DatabaseUrl.extract().getConnection();
+
+        Statement stmt = connection.createStatement();
+        stmt.executeUpdate("CREATE TABLE IF NOT EXISTS mantra (wisdom varchar, tick timestamp)");
+        ResultSet rs = stmt.executeQuery("SELECT wisdom FROM mantra");
+
+        String output = "[";
+        while (rs.next()) {
+          output += ( "\"" + rs.getString("wisdom") + "\"");
+        }
+
+      } catch (Exception e) {
+        //attributes.put("message", "There was an error: " + e);
+        //return new ModelAndView(attributes, "error.ftl");
+        return "There was an error: " + e;
+      } finally {
+        if (connection != null) try{connection.close();} catch(SQLException e){}
+      }
+      return "Created OK";
+    });
+
   }
 
 }
