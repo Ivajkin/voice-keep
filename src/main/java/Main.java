@@ -59,7 +59,7 @@ public class Main {
       }
     }, new FreeMarkerEngine());
 
-    /* Testing DB with recording of "ticks" */
+    /* Using DB with recording of "mantras" */
     get("/", (req, res) -> {
       Connection connection = null;
       Map<String, Object> attributes = new HashMap<>();
@@ -67,13 +67,16 @@ public class Main {
         connection = DatabaseUrl.extract().getConnection();
 
         Statement stmt = connection.createStatement();
-        stmt.executeUpdate("CREATE TABLE IF NOT EXISTS ticks (tick timestamp)");
-        stmt.executeUpdate("INSERT INTO ticks VALUES (now())");
-        ResultSet rs = stmt.executeQuery("SELECT tick FROM ticks");
+        stmt.executeUpdate("CREATE TABLE IF NOT EXISTS mantra (wisdom varchar, tick timestamp)");
+        //stmt.executeUpdate("INSERT INTO ticks VALUES (now())");
+        ResultSet rs = stmt.executeQuery("SELECT wisdom FROM mantra");
 
         ArrayList<String> output = new ArrayList<String>();
+        output.add("<button>Записать</button><button>Сохранить</button><div>...</div><br/>");
         while (rs.next()) {
-          output.add( "Read from DB: " + rs.getTimestamp("tick"));
+          //output.add( "Read from DB: " + rs.getTimestamp("tick"));
+          //output.add( "Read from DB: " + rs.getString("wisdom"));
+          output.add( "<div class=\"wisdom\" style=\"background: #CCCCCC;\">" + rs.getString("wisdom") + "</div>");
         }
 
         attributes.put("results", output);
@@ -85,6 +88,18 @@ public class Main {
         if (connection != null) try{connection.close();} catch(SQLException e){}
       }
     }, new FreeMarkerEngine());
+
+
+    get("/mantra/create", (req, res) -> {
+      Connection connection = null;
+      Map<String, Object> attributes = new HashMap<>();
+      try {
+        connection = DatabaseUrl.extract().getConnection();
+
+        Statement stmt = connection.createStatement();
+        stmt.executeUpdate("CREATE TABLE IF NOT EXISTS mantra (wisdom varchar, tick timestamp)");
+        stmt.executeUpdate("INSERT INTO mantra VALUES (\"" + req.params("wisdom") + "\",now())");
+    });
 
 
 
