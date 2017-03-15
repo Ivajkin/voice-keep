@@ -103,8 +103,9 @@ public class Main {
           attributes.put("message", "There was an error: " + e);
           return new ModelAndView(attributes, "error.ftl");
       } finally {
-          if (connection != null) try{connection.close();}
+          if (connection != null) try{connection.close();} catch(SQLException e){}
       }
+      return "Created OK";
     });
 
   }
