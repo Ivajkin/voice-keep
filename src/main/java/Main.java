@@ -98,7 +98,8 @@ public class Main {
 
         Statement stmt = connection.createStatement();
         stmt.executeUpdate("CREATE TABLE IF NOT EXISTS mantra (wisdom varchar, tick timestamp)");
-        stmt.executeUpdate("INSERT INTO mantra(wisdom,tick) VALUES (\"" + req.params("wisdom") + "\",now())");
+        //stmt.executeUpdate("INSERT INTO mantra(wisdom,tick) VALUES (\"" + req.params("wisdom") + "\",now())");
+        stmt.executeUpdate("INSERT INTO mantra(wisdom,tick) VALUES (\"TEST\",now())");
       } catch (Exception e) {
           //attributes.put("message", "There was an error: " + e);
           //return new ModelAndView(attributes, "error.ftl");
