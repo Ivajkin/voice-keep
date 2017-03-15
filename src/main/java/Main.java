@@ -137,7 +137,7 @@ public class Main {
       return output;
     });
 
-    enableCORS("http://*.jsbin.com", "GET", "");
+    enableCORS("http://output.jsbin.com", "GET", "");
   }
   // Enables CORS on requests. This method is an initialization method and should be called once.
   private static void enableCORS(final String origin, final String methods, final String headers) {
