@@ -121,8 +121,10 @@ public class Main {
         stmt.executeUpdate("CREATE TABLE IF NOT EXISTS mantra (wisdom varchar, tick timestamp)");
         ResultSet rs = stmt.executeQuery("SELECT wisdom FROM mantra");
 
-        while (rs.next()) {
+        if(rs.next())
           output += ( "\"" + rs.getString("wisdom") + "\"");
+        while (rs.next()) {
+          output += ( ", \"" + rs.getString("wisdom") + "\"");
         }
 
       } catch (Exception e) {
