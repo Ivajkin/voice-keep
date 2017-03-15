@@ -72,7 +72,7 @@ public class Main {
         ResultSet rs = stmt.executeQuery("SELECT wisdom FROM mantra");
 
         ArrayList<String> output = new ArrayList<String>();
-        output.add("<button>Записать</button><button>Сохранить</button><div>...</div><br/>");
+        output.add("<button>Записать</button><button>Сохранить</button><div id=\"speech-box\">...</div><br/>");
         while (rs.next()) {
           //output.add( "Read from DB: " + rs.getTimestamp("tick"));
           //output.add( "Read from DB: " + rs.getString("wisdom"));
@@ -99,6 +99,12 @@ public class Main {
         Statement stmt = connection.createStatement();
         stmt.executeUpdate("CREATE TABLE IF NOT EXISTS mantra (wisdom varchar, tick timestamp)");
         stmt.executeUpdate("INSERT INTO mantra VALUES (\"" + req.params("wisdom") + "\",now())");
+      } catch (Exception e) {
+          attributes.put("message", "There was an error: " + e);
+          return new ModelAndView(attributes, "error.ftl");
+      } finally {
+          if (connection != null) try{connection.close();} catch(SQLException e){}
+      }
     });
 
 
