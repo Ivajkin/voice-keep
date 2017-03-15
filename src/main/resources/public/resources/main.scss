@@ -1,0 +1,112 @@
+@import "css_cached";
+
+$header-font-stack:     FontAwesome, Georgia, serif;
+$small-text-font-stack: FontAwesome, Tahoma, sans-serif;
+$primary-color:         #101010;
+$light-color:           #f3f4ec;
+$purple-color:          #522d55;
+$menu-open-color:       $purple-color;
+
+@mixin linear-gradient($direction, $color-stops...) {
+  background: nth(nth($color-stops, 1), 1);
+  background: -webkit-linear-gradient(legacy-direction($direction), $color-stops);
+  background: linear-gradient($direction, $color-stops);
+}
+html body.html {
+    background: #188ca5;
+}
+
+#footer {
+    background: linear-gradient(to bottom, #188ca5, #1696a5);
+}
+#footer h3 {
+    color: $light-color;
+    font-family: $header-font-stack;
+}
+#footer a {
+    color: $light-color;
+}
+
+body {
+  font: 100% $small-text-font-stack !important;
+  color: $primary-color;
+}
+
+html #page {
+    background: $light-color;
+}
+
+html .decoration {
+    background: url(../images/decoration-flag.jpg) repeat-y top center;
+}
+
+html body.html #header {
+    // #1696a5 -> #188ca5
+    background: linear-gradient(to bottom, #188ca5, #1696a5);
+    //background: linear-gradient(to bottom right, #1696a5, purple);
+
+    box-shadow: 0px 0px 5px rgba(0,0,0,0.4), 0px 0px 2px rgba(255,255,255,0.5);
+}
+html body.html #header.night-mode {
+    background: linear-gradient(to bottom right, #1696a5, purple);
+}
+
+html body.html #header .container #crest {
+    background-image: url(./home-logo.png);
+}
+
+html body.html #header .container #nav-toggle a span {
+    color: $light-color;
+}
+html body.html #header .container #nav-toggle a i {
+    background: $light-color;
+}
+
+html body.menu-open #nav-toggle span {
+    color: $menu-open-color !important;
+    text-shadow: 0 0 1px rgba(255, 255, 255, 0.3);
+}
+html body.menu-open #nav-toggle i {
+    background: $menu-open-color !important;
+}
+
+body.front #nav-primary>ul>li.first.leaf a {
+    color: $purple-color;
+}
+
+html .decoration {
+    background-size: 1500px 500px;
+}
+
+.font-awesome {
+    font-family: FontAwesome, $small-text-font-stack !important;
+}
+
+body.front .menu-block-wrapper.menu-name-main-menu .row-fluid .leaf a h3 {
+    color: $primary-color !important;
+}
+
+html #page h2, html #page h3 {
+    font-family: $header-font-stack;
+    font-weight: bold;
+}
+
+@media screen and (max-width: 767px) {
+    html .mobile-header #tagline {
+        font-size: 0.9em;
+    }
+    body.front #nav-primary>ul>li.first.leaf a {
+        border-bottom: 2px solid $purple-color;
+    }
+    html .mobile-header #mobile-logo {
+        background-image: url(../images/logo-navy.png);
+    }
+    html .mobile-header #tagline {
+        color: #2295a4;
+    }
+}
+@media screen and (max-width: 992px) {
+    html body.html #header .container #crest {
+        width: 205px;
+    }
+}
